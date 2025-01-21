@@ -1,0 +1,4 @@
+name: Rankify_
+version: '1.0-SNAPSHOT'
+main: org.powell.rankify_.Rankify_
+api-version: '1.21'
