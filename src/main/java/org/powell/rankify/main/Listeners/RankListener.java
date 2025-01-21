@@ -1,4 +1,4 @@
-package org.powell.rankify_.main.Listeners;
+package org.powell.rankify.main.Listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -8,10 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.powell.rankify_.main.Enums.Rank;
-import org.powell.rankify_.main.Main;
-
-import java.util.UUID;
+import org.powell.rankify.main.Enums.Rank;
+import org.powell.rankify.main.Main;
 
 public class RankListener implements Listener {
     private Main main;

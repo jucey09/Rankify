@@ -1,4 +1,4 @@
-package org.powell.rankify_.main.Commands;
+package org.powell.rankify.main.Commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -7,8 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.powell.rankify_.main.Enums.Rank;
-import org.powell.rankify_.main.Main;
+import org.powell.rankify.main.Enums.Rank;
+import org.powell.rankify.main.Main;
 
 public class RankCommand implements CommandExecutor {
     private Main main;

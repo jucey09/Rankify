@@ -1,11 +1,11 @@
-package org.powell.rankify_.main;
+package org.powell.rankify.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.powell.rankify_.main.Commands.RankCommand;
-import org.powell.rankify_.main.Listeners.RankListener;
-import org.powell.rankify_.main.Managers.NametagManager;
-import org.powell.rankify_.main.Managers.RankManager;
+import org.powell.rankify.main.Commands.RankCommand;
+import org.powell.rankify.main.Listeners.RankListener;
+import org.powell.rankify.main.Managers.NametagManager;
+import org.powell.rankify.main.Managers.RankManager;
 
 public final class Main extends JavaPlugin {
 private RankManager rankManager;

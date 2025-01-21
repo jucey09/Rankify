@@ -1,4 +1,4 @@
-package org.powell.rankify_.main.Enums;
+package org.powell.rankify.main.Enums;
 
 import org.bukkit.ChatColor;
 

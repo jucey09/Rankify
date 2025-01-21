@@ -1,11 +1,11 @@
-package org.powell.rankify_.main.Managers;
+package org.powell.rankify.main.Managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
-import org.powell.rankify_.main.Enums.Rank;
-import org.powell.rankify_.main.Main;
+import org.powell.rankify.main.Enums.Rank;
+import org.powell.rankify.main.Main;
 
 import java.io.File;
 import java.io.IOException;
