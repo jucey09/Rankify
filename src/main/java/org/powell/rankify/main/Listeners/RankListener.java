@@ -19,6 +19,7 @@ public class RankListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e){
         Player player = e.getPlayer();
+
         if (!player.hasPlayedBefore()){
             main.getRankManager().setRank(player.getUniqueId(), Rank.Guest,true);
         }
@@ -32,6 +33,7 @@ public class RankListener implements Listener {
     public void onQuit(PlayerQuitEvent e){
         main.getNametagManager().removeTag(e.getPlayer());
     }
+
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
         e.setCancelled(true);

@@ -23,7 +23,7 @@ private HashMap<UUID, PermissionAttachment> perm = new HashMap<>();
          if (!main.getDataFolder().exists()){
              main.getDataFolder().mkdir();
          }
-         file = new File(main.getDataFolder(), "ranks.yml");
+         file = new File(main.getDataFolder(), "config.yml");
          if (!file.exists()){
              try {
                  file.createNewFile();

@@ -30,7 +30,7 @@ public class RankCommand implements CommandExecutor {
                             if (rank.name().equalsIgnoreCase(args[1])){
                                 main.getRankManager().setRank(target.getUniqueId(), rank, false);
 
-                                player.sendMessage(ChatColor.AQUA + "You Changed " + target.getName() + "'s rank to "+ rank.getDisplay() + ChatColor.AQUA + ".");
+                                player.sendMessage(ChatColor.AQUA + "You changed " + target.getName() + "'s rank to "+ rank.getDisplay() + ChatColor.AQUA + ".");
                             if (target.isOnline()){
                                 target.getPlayer().sendMessage(ChatColor.DARK_AQUA + player.getName() + " set your rank to " + rank.getDisplay() + ChatColor.DARK_AQUA + ".");
                             }
@@ -42,7 +42,7 @@ public class RankCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "This user has never joined the server");
                     }
                 } else {
-                    player.sendMessage(ChatColor.RED + "Invalid Usage. Please use /rank <player> <rank>");
+                    player.sendMessage(ChatColor.RED + "Invalid Usage. Please use /rankify <player> <rank>");
                 }
             } else {
                 player.sendMessage(ChatColor.RED + "You must be op to use this command");

@@ -13,7 +13,7 @@ private NametagManager nametagManager;
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getCommand("rank").setExecutor(new RankCommand(this));
+        getCommand("rankify").setExecutor(new RankCommand(this));
 
         rankManager = new RankManager(this);
         nametagManager = new NametagManager(this);
