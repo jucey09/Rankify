@@ -4,5 +4,3 @@ main: org.powell.rankify.main.Main
 api-version: '1.21'
 commands:
   rankify:
-    aliases:
-      - r
