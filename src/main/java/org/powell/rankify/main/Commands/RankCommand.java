@@ -17,13 +17,15 @@ import org.powell.rankify.main.Main;
 import org.powell.rankify.main.Managers.RankManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RankCommand implements CommandExecutor {
     private Main main;
     private RankManager rankManager;
 
-    public RankCommand(Main main) {
+    public RankCommand(Main main, RankManager rankManager) {
         this.main = main;
+        this.rankManager = rankManager;
     }
 
     @Override
@@ -50,33 +52,35 @@ public class RankCommand implements CommandExecutor {
                     } else {
                         player.sendMessage(ChatColor.RED + "This user has never joined the server");
                     }
-                } else if (args.length == 2 && args[0].equalsIgnoreCase("gui")){
+                } else if (args[0].equalsIgnoreCase("gui")){
                     //ONLINE PLAYERS
                     Inventory inv = Bukkit.createInventory(player, 54, ChatColor.DARK_AQUA + "Rankify Menu");
                     for(Player online_player : Bukkit.getServer().getOnlinePlayers()) {
-                        ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
+                        ItemStack skull = new ItemStack(Material.PLAYER_HEAD,1, (byte) 3);
                         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
                         skullMeta.setOwner(online_player.getName());
                         skullMeta.setDisplayName(ChatColor.GOLD + online_player.getName());
-                        ArrayList<String> rank = new ArrayList<String>();
-                        rank.add(ChatColor.GOLD + "Rank: " + rankManager.getRank(online_player.getUniqueId()));
-                        skullMeta.setLore(rank);
+                        skullMeta.setLore(Arrays.asList(ChatColor.GOLD + "Rank: " + main.getRankManager().getRank(online_player.getUniqueId())));
                         skull.setItemMeta(skullMeta);
 
-                        inv.addItem(skull);
+                        inv.setItem(10, skull);
                     }
                     //CLOSE
                     ItemStack close = new ItemStack(Material.BARRIER);
                     ItemMeta closemeta = close.getItemMeta();
                     closemeta.setDisplayName(ChatColor.RED + "Close Button");
-
+                    closemeta.setLore(Arrays.asList(""));
                     close.setItemMeta(closemeta);
 
                     inv.setItem(0, close);
 
                     //FRAME
                     ItemStack frame = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-                    for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,45,46,47,48,49,50,51,52,53,54}){
+                    ItemMeta fmeta = frame.getItemMeta();
+                    fmeta.setDisplayName(ChatColor.GRAY + "_");
+                    fmeta.setLore(Arrays.asList(""));
+                    frame.setItemMeta(fmeta);
+                    for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,49,50,51,52,53}){
                         inv.setItem(i, frame);
                     }
 
@@ -91,4 +95,6 @@ public class RankCommand implements CommandExecutor {
         }
         return false;
     }
+
+    public RankManager getRankManager() { return rankManager; }
 }

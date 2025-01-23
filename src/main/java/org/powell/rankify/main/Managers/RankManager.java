@@ -62,4 +62,6 @@ private HashMap<UUID, PermissionAttachment> perm = new HashMap<>();
         return Rank.valueOf(config.getString(uuid.toString()));
     }
     public HashMap<UUID, PermissionAttachment> getPerm() {return perm;}
+
+
 }

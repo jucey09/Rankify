@@ -11,7 +11,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
+
 public class RankGuiListener implements Listener {
+
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){
@@ -27,7 +30,7 @@ public class RankGuiListener implements Listener {
             }
             if (e.getCurrentItem().getType() == Material.PLAYER_HEAD) {
                 String player_name = clickedItem.getItemMeta().getDisplayName();
-                Inventory inv = Bukkit.createInventory(player, 26, ChatColor.GOLD + player_name);
+                Inventory inv = Bukkit.createInventory(player, 27, player_name);
                 //RANKS\\
 
                 //OWNER
@@ -91,7 +94,8 @@ public class RankGuiListener implements Listener {
 
                 ItemStack frame = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
                 ItemMeta fmeta = frame.getItemMeta();
-                fmeta.setDisplayName("");
+                fmeta.setDisplayName(ChatColor.GRAY + "_");
+                fmeta.setLore(Arrays.asList(""));
                 frame.setItemMeta(fmeta);
                 for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,19,20,21,22,23,24,25,26}){
                     inv.setItem(i, frame);
@@ -102,8 +106,10 @@ public class RankGuiListener implements Listener {
             if (clickedItem.getType() == Material.BARRIER && clickedItem.hasItemMeta()){
                 player.closeInventory();
             }
+            if (clickedItem.getType() == Material.GRAY_STAINED_GLASS_PANE && clickedItem.hasItemMeta()){
+                e.setCancelled(true);
+            }
 
         }
     }
-
 }
