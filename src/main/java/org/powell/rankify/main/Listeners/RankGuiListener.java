@@ -43,7 +43,7 @@ public class RankGuiListener implements Listener {
                 //CO-OWNER
                 ItemStack co_owner = new ItemStack(Material.GREEN_CONCRETE);
                 ItemMeta co_ownermeta = co_owner.getItemMeta();
-                co_ownermeta.setDisplayName(ChatColor.DARK_GREEN + "Co_Owner");
+                co_ownermeta.setDisplayName(ChatColor.DARK_GREEN + "CoOwner");
                 co_owner.setItemMeta(co_ownermeta);
 
                 inv.setItem(15, co_owner);

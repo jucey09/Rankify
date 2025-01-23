@@ -11,32 +11,32 @@ public class SetRankGuiListener implements Listener {
     public void onInventoryClick(InventoryClickEvent e){
 
         if (e.getInventory().getSize() == 27 && e.getCurrentItem() != null){
+            e.setCancelled(true);
             Player player = (Player) e.getWhoClicked();
             String player_name = e.getView().getTitle();
             switch (e.getRawSlot()){
                 case 0:
                     break;
                 case 10: //GUEST
-                    player.performCommand("/rankify " + player_name + " guest");
-                    player.sendMessage(player_name);
+                    player.performCommand("rankify " + player_name + " guest");
                     break;
                 case 11://MEMBER
-                    player.performCommand("/rankify " + player_name + " member");
+                    player.performCommand("rankify " + player_name + " member");
                     break;
                 case 12://MODERATOR
-                    player.performCommand("/rankify " + player_name + " moderator");
+                    player.performCommand("rankify " + player_name + " moderator");
                     break;
                 case 13://ADMIN
-                    player.performCommand("/rankify " + player_name + " admin");
+                    player.performCommand("rankify " + player_name + " admin");
                     break;
                 case 14://YOUTUBE
-                    player.performCommand("/rankify " + player_name + " youtube");
+                    player.performCommand("rankify " + player_name + " youtube");
                     break;
                 case 15://CO-OWNER
-                    player.performCommand("/rankify " + player_name + " co_owner");
+                    player.performCommand("rankify " + player_name + " coowner");
                     break;
                 case 16://OWNER
-                    player.performCommand("/rankify " + player_name + " owner");
+                    player.performCommand("rankify " + player_name + " owner");
                     break;
                 default:
                     return;

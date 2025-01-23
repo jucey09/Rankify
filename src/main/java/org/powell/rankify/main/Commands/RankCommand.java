@@ -18,6 +18,7 @@ import org.powell.rankify.main.Managers.RankManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class RankCommand implements CommandExecutor {
     private Main main;
@@ -55,16 +56,7 @@ public class RankCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("gui")){
                     //ONLINE PLAYERS
                     Inventory inv = Bukkit.createInventory(player, 54, ChatColor.DARK_AQUA + "Rankify Menu");
-                    for(Player online_player : Bukkit.getServer().getOnlinePlayers()) {
-                        ItemStack skull = new ItemStack(Material.PLAYER_HEAD,1, (byte) 3);
-                        SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
-                        skullMeta.setOwner(online_player.getName());
-                        skullMeta.setDisplayName(ChatColor.GOLD + online_player.getName());
-                        skullMeta.setLore(Arrays.asList(ChatColor.GOLD + "Rank: " + main.getRankManager().getRank(online_player.getUniqueId())));
-                        skull.setItemMeta(skullMeta);
 
-                        inv.setItem(10, skull);
-                    }
                     //CLOSE
                     ItemStack close = new ItemStack(Material.BARRIER);
                     ItemMeta closemeta = close.getItemMeta();
@@ -83,6 +75,18 @@ public class RankCommand implements CommandExecutor {
                     for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,49,50,51,52,53}){
                         inv.setItem(i, frame);
                     }
+                    for(Player all : Bukkit.getServer().getOnlinePlayers()) {
+
+                        ItemStack players = new ItemStack(Material.PLAYER_HEAD);
+                        SkullMeta playersMeta = (SkullMeta) players.getItemMeta();
+                        playersMeta.setOwningPlayer(all);
+                        playersMeta.setDisplayName(ChatColor.GOLD + all.getName());
+                        playersMeta.setLore(Arrays.asList(ChatColor.GOLD + "Rank: " + main.getRankManager().getRank(all.getUniqueId())));
+                        players.setItemMeta(playersMeta);
+
+                        inv.addItem(players);
+                    }
+
 
                     player.openInventory(inv);
 

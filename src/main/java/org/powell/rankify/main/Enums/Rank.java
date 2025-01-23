@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 
 public enum Rank {
     Owner(ChatColor.DARK_RED + "Owner"),
-    CoOwner(ChatColor.DARK_GREEN + "Co_Owner"),
+    CoOwner(ChatColor.DARK_GREEN + "CoOwner"),
     Youtube(ChatColor.GOLD + "Youtube"),
     Admin(ChatColor.DARK_PURPLE + "Admin"),
     Moderator(ChatColor.GREEN + "Moderator"),
