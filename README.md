@@ -1,3 +1,3 @@
-ALL RIGHTS RESERVED
+All rights reserved unless explicitly stated.
 
-DO NOT USE/ALTER CODE WITHOUT THE AUHTOR'S PERMISSION.
+
