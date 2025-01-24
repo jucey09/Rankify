@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.powell.rankify.main.Enums.Rank;
 import org.powell.rankify.main.Main;
 import org.powell.rankify.main.Managers.RankManager;
+import org.powell.rankify.main.Utils.PageUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +55,7 @@ public class RankCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "This user has never joined the server");
                     }
                 } else if (args[0].equalsIgnoreCase("gui")){
+                    int page = 1;
                     //ONLINE PLAYERS
                     Inventory inv = Bukkit.createInventory(player, 54, ChatColor.DARK_AQUA + "Rankify Menu");
 
@@ -72,7 +74,7 @@ public class RankCommand implements CommandExecutor {
                     fmeta.setDisplayName(ChatColor.GRAY + "_");
                     fmeta.setLore(Arrays.asList(""));
                     frame.setItemMeta(fmeta);
-                    for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,46,47,48,49,50,51,52,53}){
+                    for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,26,27,35,36,44,45,47,48,49,50,51,52}){
                         inv.setItem(i, frame);
                     }
                     for(Player all : Bukkit.getServer().getOnlinePlayers()) {
@@ -84,9 +86,39 @@ public class RankCommand implements CommandExecutor {
                         playersMeta.setLore(Arrays.asList(ChatColor.GOLD + "Rank: " + main.getRankManager().getRank(all.getUniqueId())));
                         players.setItemMeta(playersMeta);
 
-                        inv.addItem(players);
+                            inv.addItem(players);
                     }
+                    ItemStack players = new ItemStack(Material.PLAYER_HEAD);
 
+                    List<ItemStack> heads =  Arrays.asList((ItemStack) players);
+
+                    ItemStack left;
+                    ItemMeta leftMeta;
+                    if (PageUtil.isPageValid(heads,  page - 1, 28)){
+                        left = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+                        leftMeta = left.getItemMeta();
+                        leftMeta.setDisplayName(ChatColor.GREEN + "---->");
+                    } else {
+                        left = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+                        leftMeta = left.getItemMeta();
+                        leftMeta.setDisplayName(ChatColor.RED + "---->");
+                    }
+                    left.setItemMeta(leftMeta);
+                    inv.setItem(53, left);
+
+                    ItemStack right;
+                    ItemMeta rightMeta;
+                    if (PageUtil.isPageValid(heads, page - 1, 28)){
+                        right = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+                        rightMeta = right.getItemMeta();
+                        rightMeta.setDisplayName(ChatColor.GREEN + "<----");
+                    } else {
+                        right = new ItemStack(Material.RED_STAINED_GLASS_PANE);
+                        rightMeta = right.getItemMeta();
+                        rightMeta.setDisplayName(ChatColor.RED + "<----");
+                    }
+                    right.setItemMeta(rightMeta);
+                    inv.setItem(45, right);
 
                     player.openInventory(inv);
 
@@ -94,7 +126,7 @@ public class RankCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "Invalid Usage. Please use /rankify <player> <rank> or /rankify gui");
                 }
             } else {
-                player.sendMessage(ChatColor.RED + "You must be op to use this command");
+                player.sendMessage(ChatColor.RED + "You must be op to use this command.");
             }
         }
         return false;
