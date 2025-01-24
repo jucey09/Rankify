@@ -20,7 +20,7 @@ private NametagManager nametagManager;
         rankManager = new RankManager(this);
         nametagManager = new NametagManager(this);
 
-        Bukkit.getPluginManager().registerEvents(new RankGuiListener(), this);
+        Bukkit.getPluginManager().registerEvents(new RankGuiListener(this), this);
         Bukkit.getPluginManager().registerEvents(new SetRankGuiListener(), this);
         Bukkit.getPluginManager().registerEvents(new RankListener(this), this);
     }

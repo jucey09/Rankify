@@ -13,9 +13,12 @@ public class PageUtil {
 
         List<ItemStack> newItems = new ArrayList<>();
         for (int i = lowerBound; i < upperBound; i++){
-            newItems.add(items.get(i));
+            try {
+                newItems.add(items.get(i));
+            } catch (IndexOutOfBoundsException e){
+                break;
+            }
         }
-
         return newItems;
     }
 

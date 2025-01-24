@@ -10,11 +10,17 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.powell.rankify.main.GUI.GUI;
+import org.powell.rankify.main.Main;
 
 import java.util.Arrays;
 
 public class RankGuiListener implements Listener {
+    private Main main;
 
+    public RankGuiListener(Main main){
+        this.main = main;
+    }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){
@@ -28,6 +34,13 @@ public class RankGuiListener implements Listener {
                 e.setCancelled(true);
                 return;
             }
+            int page = Integer.parseInt(e.getInventory().getItem(45).getItemMeta().getLocalizedName());
+            if (e.getRawSlot() == 45 && e.getCurrentItem().getType().equals(Material.LIME_STAINED_GLASS_PANE)){
+                new GUI(main, player,page - 1);
+            } else if (e.getRawSlot() == 53 && e.getCurrentItem().getType().equals(Material.LIME_STAINED_GLASS_PANE)){
+                new GUI(main, player,page + 1);}
+            e.setCancelled(true);
+
             if (e.getCurrentItem().getType() == Material.PLAYER_HEAD) {
                 String player_name = clickedItem.getItemMeta().getDisplayName();
                 Inventory inv = Bukkit.createInventory(player, 27, player_name);
