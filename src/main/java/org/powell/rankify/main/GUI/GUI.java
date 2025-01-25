@@ -39,7 +39,7 @@ public class GUI{
         fmeta.setDisplayName(ChatColor.GRAY + "_");
         fmeta.setLore(Arrays.asList(""));
         frame.setItemMeta(fmeta);
-        for (int i : new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 46, 47, 48, 49, 50, 51, 52}) {
+        for (int i : new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 46, 47, 48, 50, 51, 52}) {
             inv.setItem(i, frame);
         }
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
@@ -47,15 +47,23 @@ public class GUI{
             ItemStack players = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta playersMeta = (SkullMeta) players.getItemMeta();
             playersMeta.setOwningPlayer(all);
-            playersMeta.setDisplayName(ChatColor.GOLD + all.getName());
+            playersMeta.setDisplayName(all.getName());
             playersMeta.setLore(Arrays.asList(ChatColor.GOLD + "Rank: " + main.getRankManager().getRank(all.getUniqueId())));
             players.setItemMeta(playersMeta);
 
             inv.addItem(players);
         }
-        ItemStack players = new ItemStack(Material.PLAYER_HEAD);
+        ItemStack players = new ItemStack(Material.DIAMOND_AXE);
 
         List<ItemStack> heads = Arrays.asList((ItemStack) players);
+
+        //PAGE NUMBER
+        ItemStack page_number = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+        ItemMeta pmeta = page_number.getItemMeta();
+        pmeta.setDisplayName(page + "");
+        page_number.setItemMeta(pmeta);
+
+        inv.setItem(49, page_number);
 
         ItemStack left;
         ItemMeta leftMeta;
@@ -89,7 +97,7 @@ public class GUI{
         for (int i = 0; i < 135; i++) {
             allItems.add(new ItemStack(Material.DIAMOND_AXE));
         }
-        for (ItemStack is : PageUtil.getPageItems(allItems, page, 28)) {
+        for (ItemStack is : PageUtil.getPageItems(allItems, page, 50)) {
             inv.addItem(is);
         }
 

@@ -26,7 +26,7 @@ public class SetRankGuiListener implements Listener {
                 case 12://MODERATOR
                     player.performCommand("rankify " + player_name + " moderator");
                     break;
-                case 13://ADMIN
+                case 13://ADMIM
                     player.performCommand("rankify " + player_name + " admin");
                     break;
                 case 14://YOUTUBE

@@ -24,8 +24,7 @@ public class RankGuiListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){
-        if (ChatColor.translateAlternateColorCodes('&', e.getView().getTitle()).equals(ChatColor.DARK_AQUA + "Rankify Menu") &&
-        e.getCurrentItem() != null){
+        if (e.getView().getTitle().equals(ChatColor.DARK_AQUA + "Rankify Menu") && e.getCurrentItem() != null){
             Player player = (Player) e.getWhoClicked();
 
             ItemStack clickedItem = e.getCurrentItem();
@@ -34,7 +33,7 @@ public class RankGuiListener implements Listener {
                 e.setCancelled(true);
                 return;
             }
-            int page = Integer.parseInt(e.getInventory().getItem(45).getItemMeta().getLocalizedName());
+            int page = Integer.parseInt(e.getInventory().getItem(49).getItemMeta().getLocalizedName());
             if (e.getRawSlot() == 45 && e.getCurrentItem().getType().equals(Material.LIME_STAINED_GLASS_PANE)){
                 new GUI(main, player,page - 1);
             } else if (e.getRawSlot() == 53 && e.getCurrentItem().getType().equals(Material.LIME_STAINED_GLASS_PANE)){
