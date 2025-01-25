@@ -9,16 +9,13 @@ public class PageUtil {
     public static List<ItemStack> getPageItems(List<ItemStack> items, int page, int spaces) {
 
         int upperBound = page * spaces;
-
         int lowerBound = upperBound - spaces;
 
         List<ItemStack> newItems = new ArrayList<>();
-
         for (int i = lowerBound; i < upperBound; i++) {
-
             try {
                 newItems.add(items.get(i));
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException x) {
                 break;
             }
         }

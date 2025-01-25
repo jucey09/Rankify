@@ -1,10 +1,14 @@
 package org.powell.rankify.main.GUI;
 
+import dev.triumphteam.gui.builder.item.ItemBuilder;
+import dev.triumphteam.gui.guis.Gui;
+import dev.triumphteam.gui.guis.GuiItem;
+import dev.triumphteam.gui.guis.PaginatedGui;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -22,16 +26,22 @@ public class GUI{
         this.main = main;
 
         //ONLINE PLAYERS
-        Inventory inv = Bukkit.createInventory(player, 54, ChatColor.DARK_AQUA + "Rankify Menu");
+        PaginatedGui gui = Gui.paginated()
+                .title(Component.text(ChatColor.DARK_AQUA + "Rankify Menu"))
+                .rows(6)
+                .pageSize(28)
+                .create();
 
         //CLOSE
-        ItemStack close = new ItemStack(Material.BARRIER);
-        ItemMeta closemeta = close.getItemMeta();
+        ItemStack closebutton = new ItemStack(Material.BARRIER);
+        ItemMeta closemeta = closebutton.getItemMeta();
         closemeta.setDisplayName(ChatColor.RED + "Close Button");
         closemeta.setLore(Arrays.asList(""));
-        close.setItemMeta(closemeta);
+        closebutton.setItemMeta(closemeta);
 
-        inv.setItem(0, close);
+        GuiItem close = ItemBuilder.from(closebutton).asGuiItem();
+
+        gui.setItem(0, close);
 
         //FRAME
         ItemStack frame = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
@@ -39,8 +49,11 @@ public class GUI{
         fmeta.setDisplayName(ChatColor.GRAY + "_");
         fmeta.setLore(Arrays.asList(""));
         frame.setItemMeta(fmeta);
-        for (int i : new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 46, 47, 48, 50, 51, 52}) {
-            inv.setItem(i, frame);
+
+        GuiItem frames = ItemBuilder.from(frame).asGuiItem();
+
+        for (int i : new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 46, 47, 48, 49, 50, 51, 52}) {
+            gui.setItem(i, frames);
         }
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 
@@ -51,11 +64,10 @@ public class GUI{
             playersMeta.setLore(Arrays.asList(ChatColor.GOLD + "Rank: " + main.getRankManager().getRank(all.getUniqueId())));
             players.setItemMeta(playersMeta);
 
-            inv.addItem(players);
-        }
-        ItemStack players = new ItemStack(Material.DIAMOND_AXE);
+            GuiItem all_players = ItemBuilder.from(players).asGuiItem();
+            gui.addItem(all_players);
 
-        List<ItemStack> heads = Arrays.asList((ItemStack) players);
+        }
 
         //PAGE NUMBER
         ItemStack page_number = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
@@ -63,44 +75,67 @@ public class GUI{
         pmeta.setDisplayName(page + "");
         page_number.setItemMeta(pmeta);
 
-        inv.setItem(49, page_number);
+        //PAGE BUTTONS
+        gui.setItem(45, ItemBuilder.from(Material.PAPER).setName(ChatColor.GREEN + "Previous").asGuiItem(event -> gui.previous()));
 
-        ItemStack left;
-        ItemMeta leftMeta;
-        if (PageUtil.isPageValid(heads, page - 1, 28)) {
-            left = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-            leftMeta = left.getItemMeta();
-            leftMeta.setDisplayName(ChatColor.GREEN + "---->");
-        } else {
-            left = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-            leftMeta = left.getItemMeta();
-            leftMeta.setDisplayName(ChatColor.RED + "---->");
-        }
-        left.setItemMeta(leftMeta);
-        inv.setItem(53, left);
+        gui.setItem(53, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> gui.next()));
 
-        ItemStack right;
-        ItemMeta rightMeta;
-        if (PageUtil.isPageValid(heads, page - 1, 28)) {
-            right = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-            rightMeta = right.getItemMeta();
-            rightMeta.setDisplayName(ChatColor.GREEN + "<----");
-        } else {
-            right = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-            rightMeta = right.getItemMeta();
-            rightMeta.setDisplayName(ChatColor.RED + "<----");
-        }
-        right.setItemMeta(rightMeta);
-        inv.setItem(45, right);
+        ItemStack players = new ItemStack(Material.PLAYER_HEAD);
+        GuiItem item = ItemBuilder.from(players).asGuiItem();
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
+        gui.addItem(item);
 
-        List<ItemStack> allItems = new ArrayList<>();
-        for (int i = 0; i < 135; i++) {
-            allItems.add(new ItemStack(Material.DIAMOND_AXE));
-        }
-        for (ItemStack is : PageUtil.getPageItems(allItems, page, 50)) {
-            inv.addItem(is);
-        }
 
-        player.openInventory(inv);
+        gui.open(player);
     }
 }
