@@ -10,16 +10,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.powell.rankify.main.Main;
 
 import java.util.Arrays;
 
 public class RankGuiListener implements Listener {
-    private Main main;
-
-    public RankGuiListener(Main main){
-        this.main = main;
-    }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){

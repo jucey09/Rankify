@@ -12,8 +12,6 @@ public enum Rank {
     Guest(ChatColor.GRAY + "Guest");
 
     private String display;
-    Rank(String display){
-        this.display = display;
-    }
-    public String getDisplay() {return display;}
+    Rank(String display){ this.display = display; }
+    public String getDisplay() { return display;}
 }

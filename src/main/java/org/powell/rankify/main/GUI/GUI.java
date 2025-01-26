@@ -13,11 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.powell.rankify.main.Main;
-import org.powell.rankify.main.Utils.PageUtil;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class GUI{
     public Main main;
