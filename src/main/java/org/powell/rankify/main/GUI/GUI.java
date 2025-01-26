@@ -65,12 +65,6 @@ public class GUI{
 
         }
 
-        //PAGE NUMBER
-        ItemStack page_number = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
-        ItemMeta pmeta = page_number.getItemMeta();
-        pmeta.setDisplayName(page + "");
-        page_number.setItemMeta(pmeta);
-
         //PAGE BUTTONS
         gui.setItem(45, ItemBuilder.from(Material.ARROW).setName("Previous").asGuiItem(event -> gui.previous()));
         gui.setItem(53, ItemBuilder.from(Material.ARROW).setName("Next").asGuiItem(event -> gui.next()));
