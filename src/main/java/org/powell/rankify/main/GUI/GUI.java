@@ -76,65 +76,8 @@ public class GUI{
         page_number.setItemMeta(pmeta);
 
         //PAGE BUTTONS
-        gui.setItem(45, ItemBuilder.from(Material.PAPER).setName(ChatColor.GREEN + "Previous").asGuiItem(event -> gui.previous()));
-
-        gui.setItem(53, ItemBuilder.from(Material.PAPER).setName("Next").asGuiItem(event -> gui.next()));
-
-        ItemStack players = new ItemStack(Material.PLAYER_HEAD);
-        GuiItem item = ItemBuilder.from(players).asGuiItem();
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-        gui.addItem(item);
-
+        gui.setItem(45, ItemBuilder.from(Material.ARROW).setName("Previous").asGuiItem(event -> gui.previous()));
+        gui.setItem(53, ItemBuilder.from(Material.ARROW).setName("Next").asGuiItem(event -> gui.next()));
 
         gui.open(player);
     }
