@@ -21,7 +21,7 @@ public class GUI{
     public GUI (Main main,Player player, int page) {
         this.main = main;
 
-        //ONLINE PLAYERS
+
         PaginatedGui gui = Gui.paginated()
                 .title(Component.text(ChatColor.DARK_AQUA + "Rankify Menu"))
                 .rows(6)
@@ -51,6 +51,8 @@ public class GUI{
         for (int i : new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 18, 26, 27, 35, 36, 44, 46, 47, 48, 49, 50, 51, 52}) {
             gui.setItem(i, frames);
         }
+
+        //PLAYERS
         for (Player all : Bukkit.getServer().getOnlinePlayers()) {
 
             ItemStack players = new ItemStack(Material.PLAYER_HEAD);

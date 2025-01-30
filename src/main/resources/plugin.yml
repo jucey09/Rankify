@@ -1,8 +1,6 @@
 name: Rankify
 version: '1.0'
 main: org.powell.rankify.main.Main
-api-version: '1.21.4'
+api-version: '1.21'
 commands:
   rankify:
-permissions: rankify.me
-permissions-message: You don't have <permissions>
