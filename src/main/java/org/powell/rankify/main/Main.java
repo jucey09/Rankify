@@ -16,6 +16,8 @@ private NametagManager nametagManager;
     @Override
     public void onEnable() {
         // Plugin startup logic
+        System.out.println(ChatColor.AQUA + "Rankify Enabled");
+
         getCommand("rankify").setExecutor(new RankCommand(this, rankManager));
 
         rankManager = new RankManager(this);
@@ -24,8 +26,6 @@ private NametagManager nametagManager;
         Bukkit.getPluginManager().registerEvents(new RankGuiListener(), this);
         Bukkit.getPluginManager().registerEvents(new SetRankGuiListener(), this);
         Bukkit.getPluginManager().registerEvents(new RankListener(this), this);
-
-        System.out.println(ChatColor.AQUA + "Rankify Enabled");
     }
 
     public RankManager getRankManager() {return rankManager;}
