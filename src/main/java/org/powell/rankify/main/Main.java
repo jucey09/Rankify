@@ -16,7 +16,7 @@ private NametagManager nametagManager;
     @Override
     public void onEnable() {
         // Plugin startup logic
-        System.out.println(ChatColor.AQUA + "Rankify Enabled");
+        getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Rankify Enabled!");
 
         getCommand("rankify").setExecutor(new RankCommand(this, rankManager));
 
