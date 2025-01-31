@@ -1,6 +1,7 @@
 package org.powell.rankify.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.powell.rankify.main.Commands.RankCommand;
 import org.powell.rankify.main.Listeners.RankGuiListener;
@@ -23,6 +24,8 @@ private NametagManager nametagManager;
         Bukkit.getPluginManager().registerEvents(new RankGuiListener(), this);
         Bukkit.getPluginManager().registerEvents(new SetRankGuiListener(), this);
         Bukkit.getPluginManager().registerEvents(new RankListener(this), this);
+
+        System.out.println(ChatColor.AQUA + "Rankify Enabled");
     }
 
     public RankManager getRankManager() {return rankManager;}
