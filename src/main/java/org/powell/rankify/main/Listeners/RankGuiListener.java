@@ -21,16 +21,20 @@ public class RankGuiListener implements Listener {
             Player player = (Player) e.getWhoClicked();
 
             ItemStack clickedItem = e.getCurrentItem();
-            if (clickedItem == null || clickedItem.getType() == Material.AIR
-                    || !clickedItem.hasItemMeta()) {
-                e.setCancelled(true);
-                return;
-            }
             e.setCancelled(true);
             if (e.getCurrentItem().getType() == Material.PLAYER_HEAD) {
                 String player_name = clickedItem.getItemMeta().getDisplayName();
                 Inventory inv = Bukkit.createInventory(player, 27, player_name);
+
+                ItemStack p = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+                ItemMeta pmeta = p.getItemMeta();
+                pmeta.setDisplayName(player_name);
+                p.setItemMeta(pmeta);
+
+                inv.setItem(1, p);
+
                 //RANKS\\
+
 
                 //OWNER
                 ItemStack owner = new ItemStack(Material.RED_CONCRETE);
@@ -96,7 +100,7 @@ public class RankGuiListener implements Listener {
                 fmeta.setDisplayName(ChatColor.GRAY + "_");
                 fmeta.setLore(Arrays.asList(""));
                 frame.setItemMeta(fmeta);
-                for (int i : new int[]{1,2,3,4,5,6,7,8,9,17,18,19,20,21,22,23,24,25,26}){
+                for (int i : new int[]{2,3,4,5,6,7,8,9,17,18,19,20,21,22,23,24,25,26}){
                     inv.setItem(i, frame);
                 }
 

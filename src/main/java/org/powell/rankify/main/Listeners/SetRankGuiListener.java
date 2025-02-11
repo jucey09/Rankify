@@ -9,8 +9,8 @@ public class SetRankGuiListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e){
-
-        if (e.getInventory().getSize() == 27 && e.getCurrentItem() != null){
+        String pname = e.getInventory().getItem(1).getItemMeta().getDisplayName();
+        if (e.getInventory().getSize() == 27 && e.getCurrentItem() != null && e.getView().getTitle().equals(pname)) {
             e.setCancelled(true);
             Player player = (Player) e.getWhoClicked();
             String player_name = e.getView().getTitle();
