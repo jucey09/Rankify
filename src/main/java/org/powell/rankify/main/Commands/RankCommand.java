@@ -30,7 +30,6 @@ public class RankCommand implements CommandExecutor {
                 if (args.length == 2){
                     if (Bukkit.getOfflinePlayer(args[0]) != null){
                         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-
                         for (Rank rank : Rank.values()){
                             if (rank.name().equalsIgnoreCase(args[1])){
                                 main.getRankManager().setRank(target.getUniqueId(), rank, false);
@@ -46,14 +45,17 @@ public class RankCommand implements CommandExecutor {
                     } else {
                         player.sendMessage(ChatColor.RED + "This user has never joined the server");
                     }
-                } else if (args[0].equalsIgnoreCase("gui")){
-                    new GUI(main, player, 1);
+                    if (args[0].equalsIgnoreCase("gui")) {
+                        new GUI(main, player, 1);
+                    }
                 } else {
-                    player.sendMessage(ChatColor.RED + "Invalid Usage. Please use /rankify <player> <rank> or /rankify gui");
-                }
+                        player.sendMessage(ChatColor.RED + "Invalid Usage. Please use /rankify <player> <rank> or /rankify gui");
+                    }
             } else {
-                player.sendMessage(ChatColor.RED + "You must be op to use this command.");
+                player.sendMessage(ChatColor.RED + "You must be oped to use this command.");
             }
+        } else {
+            System.out.println("You must be a player to use this command.");
         }
         return false;
     }
