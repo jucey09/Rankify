@@ -27,15 +27,15 @@ public class RankCommand implements CommandExecutor {
         if (sender instanceof Player){
             Player player = (Player) sender;
             if (player.isOp()) {
-                if (args.length == 2){
-                    if (Bukkit.getOfflinePlayer(args[0]) != null){
+                if (args.length == 2) {
+                    if (Bukkit.getOfflinePlayer(args[0]) != null) {
                         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
-                        for (Rank rank : Rank.values()){
-                            if (rank.name().equalsIgnoreCase(args[1])){
+                        for (Rank rank : Rank.values()) {
+                            if (rank.name().equalsIgnoreCase(args[1])) {
                                 main.getRankManager().setRank(target.getUniqueId(), rank, false);
 
-                                player.sendMessage(ChatColor.AQUA + "You changed " + target.getName() + "'s rank to "+ rank.getDisplay() + ChatColor.AQUA + ".");
-                                if (target.isOnline()){
+                                player.sendMessage(ChatColor.AQUA + "You changed " + target.getName() + "'s rank to " + rank.getDisplay() + ChatColor.AQUA + ".");
+                                if (target.isOnline()) {
                                     target.getPlayer().sendMessage(ChatColor.DARK_AQUA + player.getName() + " set your rank to " + rank.getDisplay() + ChatColor.DARK_AQUA + ".");
                                 }
                                 return false;
@@ -45,9 +45,8 @@ public class RankCommand implements CommandExecutor {
                     } else {
                         player.sendMessage(ChatColor.RED + "This user has never joined the server");
                     }
-                    if (args[0].equalsIgnoreCase("gui")) {
+                } else if (args.length != 0 && args[0].equalsIgnoreCase("gui")) {
                         new GUI(main, player, 1);
-                    }
                 } else {
                         player.sendMessage(ChatColor.RED + "Invalid Usage. Please use /rankify <player> <rank> or /rankify gui");
                     }
