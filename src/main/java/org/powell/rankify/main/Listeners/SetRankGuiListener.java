@@ -13,7 +13,7 @@ public class SetRankGuiListener implements Listener {
         Inventory inv = e.getInventory();
         if (inv.getItem(1) != null) {
 
-            if (inv.getItem(1).getAmount() == 69) {
+            if (inv.getItem(1).getAmount() == 90) {
                 String pname = inv.getItem(1).getItemMeta().getDisplayName();
                 if (inv.getSize() == 27 && e.getCurrentItem() != null && e.getView().getTitle().equals(pname)) {
                     e.setCancelled(true);

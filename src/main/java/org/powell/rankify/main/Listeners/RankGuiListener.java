@@ -26,10 +26,10 @@ public class RankGuiListener implements Listener {
                 String player_name = clickedItem.getItemMeta().getDisplayName();
                 Inventory inv = Bukkit.createInventory(player, 27, player_name);
 
-                ItemStack p = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 69);
+                ItemStack p = new ItemStack(Material.WHITE_STAINED_GLASS_PANE, 90);
                 ItemMeta pmeta = p.getItemMeta();
                 pmeta.setDisplayName(player_name);
-                pmeta.setMaxStackSize(69);
+                pmeta.setMaxStackSize(1);
                 p.setItemMeta(pmeta);
 
                 inv.setItem(1, p);

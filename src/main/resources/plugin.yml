@@ -4,3 +4,9 @@ main: org.powell.rankify.main.Main
 api-version: '1.20'
 commands:
   rankify:
+    description: Change a player's rank or open the GUI.
+    permission: rankify.setrank
+permissions:
+  rankify.setrank:
+    description: Allows a player to set ranks.
+    default: op

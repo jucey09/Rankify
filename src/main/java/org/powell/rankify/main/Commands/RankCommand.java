@@ -26,7 +26,7 @@ public class RankCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (sender instanceof Player){
             Player player = (Player) sender;
-            if (player.isOp()) {
+            if (player.hasPermission("rankify.setrank")) {
                 if (args.length == 2) {
                     if (Bukkit.getOfflinePlayer(args[0]) != null) {
                         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);

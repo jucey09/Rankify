@@ -1,6 +1,7 @@
 package org.powell.rankify.main.Managers;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
@@ -33,15 +34,28 @@ private HashMap<UUID, PermissionAttachment> perm = new HashMap<>();
          }
         config = YamlConfiguration.loadConfiguration(file);
     }
-    public void setRank(UUID uuid, Rank rank, Boolean firstJoin){
-        if(Bukkit.getOfflinePlayer(uuid).isOnline() && !firstJoin){
-            PermissionAttachment attachment;
-            Player player = Bukkit.getPlayer(uuid);
-            if (perm.containsKey(uuid)){
-                attachment = perm.get(uuid);
-            } else {
-                attachment = player.addAttachment(main);
-                perm.put(uuid, attachment);
+    public void setRank(UUID uuid, Rank rank, boolean firstJoin) {
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
+
+        if (!config.contains(uuid.toString())) {
+            rank = Rank.Guest;
+        }
+
+        if (offlinePlayer.isOnline() && !firstJoin) {
+            Player player = offlinePlayer.getPlayer();
+            if (player == null) return;
+
+            PermissionAttachment attachment = perm.getOrDefault(uuid, player.addAttachment(main));
+            perm.put(uuid, attachment);
+
+            Rank oldRank = getRank(uuid);
+            if (oldRank != null) {
+                for (String oldPerm : oldRank.getPerms()) {
+                    attachment.unsetPermission(oldPerm);
+                }
+            }
+            for (String newPerm : rank.getPerms()) {
+                attachment.setPermission(newPerm, true);
             }
         }
         config.set(uuid.toString(), rank.name());
@@ -50,18 +64,30 @@ private HashMap<UUID, PermissionAttachment> perm = new HashMap<>();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (Bukkit.getOfflinePlayer(uuid).isOnline()){
-            Player player = Bukkit.getPlayer(uuid);
-            main.getNametagManager().removeTag(player);
-            assert player != null;
-            main.getNametagManager().newTag(player);
-        }
 
+        if (offlinePlayer.isOnline()) {
+            Player player = offlinePlayer.getPlayer();
+            if (player != null) {
+                main.getNametagManager().removeTag(player);
+                main.getNametagManager().newTag(player);
+            }
+        }
     }
     public Rank getRank(UUID uuid) {
-        return Rank.valueOf(config.getString(uuid.toString()));
+        String rankName = config.getString(uuid.toString());
+
+        if (rankName == null || rankName.isEmpty()) {
+            System.out.println("Rank is null or empty for player UUID: " + uuid);
+            return Rank.Guest;
+        }
+
+        try {
+            return Rank.valueOf(rankName);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid rank name for player UUID " + uuid + ": " + rankName);
+            return Rank.Guest;
+        }
     }
+
     public HashMap<UUID, PermissionAttachment> getPerm() {return perm;}
-
-
 }
