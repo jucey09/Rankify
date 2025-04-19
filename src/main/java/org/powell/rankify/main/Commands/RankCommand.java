@@ -41,7 +41,7 @@ public class RankCommand implements CommandExecutor {
                                 return false;
                             }
                         }
-                        player.sendMessage(ChatColor.RED + "You did not specify which rank: Guest, Member, Moderator, Admin, Youtube, Co_Owner, Owner");
+                        player.sendMessage(ChatColor.RED + "You did not specify which rank: Guest, Member, Sus, Egirl, STRONGEST, Discord, DONO, Helper, Moderator, Admin, Youtube, Co_Owner, Owner");
                     } else {
                         player.sendMessage(ChatColor.RED + "This user has never joined the server");
                     }
