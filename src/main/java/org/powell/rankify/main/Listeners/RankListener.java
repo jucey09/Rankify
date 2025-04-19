@@ -21,9 +21,10 @@ public class RankListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
 
-        if (!player.hasPlayedBefore()){
-            main.getRankManager().setRank(player.getUniqueId(), Rank.Guest,true);
-        } else {
+        if (!player.hasPlayedBefore()) {
+            main.getRankManager().setRank(player.getUniqueId(), Rank.Guest, true);
+        }
+        if (main.getRankManager().getRank(player.getUniqueId()) == null) {
             main.getRankManager().setRank(player.getUniqueId(), Rank.Guest,false);
         }
 

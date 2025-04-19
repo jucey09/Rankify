@@ -1,5 +1,5 @@
 name: Rankify
-version: '1.4'
+version: '1.5'
 main: org.powell.rankify.main.Main
 api-version: '1.20'
 commands:
