@@ -1,7 +1,11 @@
 name: Rankify
-version: '1.5'
+author: ___jucey
+version: '1.6'
 main: org.powell.rankify.main.Main
-api-version: '1.20'
+api-version: '1.21'
+softdepend:
+  - LuckPerms
+  - PermissionsEx
 commands:
   rankify:
     description: Change a player's rank or open the GUI.
@@ -9,4 +13,10 @@ commands:
 permissions:
   rankify.setrank:
     description: Allows a player to set ranks.
+    default: op
+  rankify.reload:
+    description: Allows a player to reload the plugin config.
+    default: op
+  rankify.gui:
+    description: Allows a player to open Rankify GUI.
     default: op

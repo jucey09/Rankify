@@ -1,0 +1,61 @@
+# Editable ranks for Rankify
+# Each entry defines a GUI item in the Set-Rank menu and which subcommand argument it triggers.
+# Fields:
+# - name: Display name (supports color codes with &)
+# - arg: Argument passed to /rankify <player> <arg>
+# - material: Bukkit Material for the item icon
+# - slot: Inventory slot (1-17 for top row, 20 - 26 for bottom row) GUI
+
+ranks:
+  - name: "&4Owner"
+    arg: "owner"
+    material: "RED_CONCRETE"
+    slot: 10
+  - name: "&2CoOwner"
+    arg: "coowner"
+    material: "GREEN_CONCRETE"
+    slot: 11
+  - name: "&6Youtube"
+    arg: "youtube"
+    material: "YELLOW_CONCRETE"
+    slot: 12
+  - name: "&5Admin"
+    arg: "admin"
+    material: "PURPLE_CONCRETE"
+    slot: 13
+  - name: "&aModerator"
+    arg: "moderator"
+    material: "LIME_CONCRETE"
+    slot: 14
+  - name: "&DONO"
+    arg: "donor"
+    material: "LIGHT_BLUE_CONCRETE"
+    slot: 15
+  - name: "&9Discord"
+    arg: "discord"
+    material: "BLUE_CONCRETE"
+    slot: 16
+  - name: "&6Helper"
+    arg: "helper"
+    material: "ORANGE_CONCRETE"
+    slot: 19
+  - name: "&eSTRONGEST"
+    arg: "strongest"
+    material: "YELLOW_CONCRETE"
+    slot: 20
+  - name: "&dEgirl"
+    arg: "egirl"
+    material: "MAGENTA_CONCRETE"
+    slot: 21
+  - name: "&2Sus"
+    arg: "sus"
+    material: "GREEN_CONCRETE"
+    slot: 22
+  - name: "&bMember"
+    arg: "member"
+    material: "LIGHT_BLUE_CONCRETE"
+    slot: 23
+  - name: "&7Guest"
+    arg: "guest"
+    material: "GRAY_CONCRETE"
+    slot: 24

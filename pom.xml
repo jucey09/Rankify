@@ -14,10 +14,17 @@
     <properties>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <guiapi.path>/Users/powellfamily/Dropbox/My\ Mac\ \(iMac.fios-router.home\)/Documents/02\ Caleb\ 0.2/MODRITH\ PROJECTS/LIBRARYS/guiapi.jar</guiapi.path>
     </properties>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,10 +55,20 @@
                 <configuration>
                     <relocations>
                         <relocation>
-                            <pattern>dev.triumphteam.gui</pattern>
-                            <shadedPattern>org.powell.rankify.main.gui</shadedPattern>
+                            <pattern>com.rysefoxx.inventory</pattern>
+                            <shadedPattern>org.powell.rankify.shaded.ryseinventory</shadedPattern>
                         </relocation>
                     </relocations>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/**</exclude>
+                                <exclude>javax/**</exclude>
+                                <exclude>org/jetbrains/annotations/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                 </configuration>
                 <executions>
                     <execution>
@@ -63,12 +80,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
     <repositories>
@@ -86,7 +97,7 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.21.4-R0.1-SNAPSHOT</version>
+            <version>1.21.6-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -95,10 +106,17 @@
             <version>5.3.2</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Simple GUI API -->
         <dependency>
-            <groupId>dev.triumphteam</groupId>
-            <artifactId>triumph-gui</artifactId>
-            <version>3.1.7</version>
+            <groupId>org.powell</groupId>
+            <artifactId>guiapi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>24.1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

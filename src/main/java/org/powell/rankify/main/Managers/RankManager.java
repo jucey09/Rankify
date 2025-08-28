@@ -18,13 +18,14 @@ private File file;
 private Main main;
 private YamlConfiguration config;
 private HashMap<UUID, PermissionAttachment> perm = new HashMap<>();
+    private final PermissionsBridge permissionsBridge;
 
     public RankManager(Main main){
         this.main = main;
          if (!main.getDataFolder().exists()){
              main.getDataFolder().mkdir();
          }
-         file = new File(main.getDataFolder(), "config.yml");
+         file = new File(main.getDataFolder(), "ranks.yml");
          if (!file.exists()){
              try {
                  file.createNewFile();
@@ -33,59 +34,109 @@ private HashMap<UUID, PermissionAttachment> perm = new HashMap<>();
              }
          }
         config = YamlConfiguration.loadConfiguration(file);
+        this.permissionsBridge = new PermissionsBridge(main);
     }
     public void setRank(UUID uuid, Rank rank, boolean firstJoin) {
+        if (uuid == null) {
+            throw new IllegalArgumentException("UUID cannot be null");
+        }
+        if (rank == null) {
+            throw new IllegalArgumentException("Rank cannot be null");
+        }
+
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-
-        if (!config.contains(uuid.toString())) {
-            rank = Rank.Guest;
+        
+        // If this is a new player and no rank is specified, use default
+        if (firstJoin && !config.contains(uuid.toString())) {
+            rank = Rank.GUEST;
         }
 
-        if (offlinePlayer.isOnline() && !firstJoin) {
+        // Handle permission updates for online players
+        if (offlinePlayer.isOnline()) {
             Player player = offlinePlayer.getPlayer();
-            if (player == null) return;
-
-            PermissionAttachment attachment = perm.getOrDefault(uuid, player.addAttachment(main));
-            perm.put(uuid, attachment);
-
-            Rank oldRank = getRank(uuid);
-            if (oldRank != null) {
-                for (String oldPerm : oldRank.getPerms()) {
-                    attachment.unsetPermission(oldPerm);
+            if (player != null) {
+                // Remove existing permissions
+                PermissionAttachment attachment = perm.get(uuid);
+                if (attachment == null) {
+                    attachment = player.addAttachment(main);
+                    perm.put(uuid, attachment);
                 }
-            }
-            for (String newPerm : rank.getPerms()) {
-                attachment.setPermission(newPerm, true);
+
+                // Clear old permissions if not first join
+                if (!firstJoin) {
+                    Rank oldRank = getRank(uuid);
+                    if (oldRank != null) {
+                        for (String perm : oldRank.getPerms()) {
+                            attachment.unsetPermission(perm);
+                        }
+                    }
+                }
+
+                // Add new permissions
+                for (String perm : rank.getPerms()) {
+                    if (perm != null && !perm.isEmpty()) {
+                        attachment.setPermission(perm, true);
+                    }
+                }
+                
+                // Update player's permissions
+                player.recalculatePermissions();
             }
         }
+
+        // Save to config
         config.set(uuid.toString(), rank.name());
         try {
             config.save(file);
         } catch (IOException e) {
-            e.printStackTrace();
+            main.getLogger().severe("Could not save rank data for " + uuid + ": " + e.getMessage());
+            if (main.getConfig().getBoolean("debug", false)) {
+                e.printStackTrace();
+            }
         }
 
+        // Apply external permissions group via supported plugins (LuckPerms/PEX)
+        try {
+            permissionsBridge.setGroup(uuid, rank);
+        } catch (Exception e) {
+            main.getLogger().warning("Failed to apply permissions group for " + uuid + ": " + e.getMessage());
+        }
+
+        // Update nametag if player is online
         if (offlinePlayer.isOnline()) {
             Player player = offlinePlayer.getPlayer();
             if (player != null) {
-                main.getNametagManager().removeTag(player);
-                main.getNametagManager().newTag(player);
+                try {
+                    if (main.getNametagManager() != null) {
+                        main.getNametagManager().removeTag(player);
+                        main.getNametagManager().newTag(player);
+                    }
+                } catch (Exception e) {
+                    main.getLogger().warning("Failed to update nametag for " + player.getName() + ": " + e.getMessage());
+                }
             }
         }
     }
+    /**
+     * Get a player's rank
+     * @param uuid The player's UUID
+     * @return The player's rank, or GUEST if not found
+     */
     public Rank getRank(UUID uuid) {
-        String rankName = config.getString(uuid.toString());
+        if (uuid == null) {
+            return Rank.GUEST;
+        }
 
+        String rankName = config.getString(uuid.toString());
         if (rankName == null || rankName.isEmpty()) {
-            System.out.println("Rank is null or empty for player UUID: " + uuid);
-            return Rank.Guest;
+            return Rank.GUEST;
         }
 
         try {
-            return Rank.valueOf(rankName);
+            return Rank.fromString(rankName);
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid rank name for player UUID " + uuid + ": " + rankName);
-            return Rank.Guest;
+            main.getLogger().warning("Invalid rank name '" + rankName + "' for UUID " + uuid);
+            return Rank.GUEST;
         }
     }
 
